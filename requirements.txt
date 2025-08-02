@@ -1,0 +1,6 @@
+pyaudio
+webrtcvad
+torch
+numpy
+groq
+openai
