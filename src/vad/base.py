@@ -29,7 +29,7 @@ class VAD(ABC):
         3. Yield audio data (as bytes) when speech segments are complete
         
         Yields:
-            bytes: Audio data containing detected speech segments
+            bytes: wav audio data containing detected speech segments
         """
         pass
     

@@ -1,4 +1,6 @@
 import pyaudio
+import asyncio
+import concurrent.futures
 
 class Listener:
     def __init__(self, rate=16000, chunk_ms=32, format=pyaudio.paInt16, channels=1):
@@ -20,6 +22,14 @@ class Listener:
         while True:
             data = self.stream.read(self.chunk)
             yield data
+
+    async def listen_async(self):
+        loop = asyncio.get_event_loop()
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            while True:
+                # Run the blocking read in a thread
+                data = await loop.run_in_executor(executor, self.stream.read, self.chunk)
+                yield data
 
     def close(self):
         self.stream.stop_stream()

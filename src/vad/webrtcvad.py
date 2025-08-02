@@ -13,7 +13,6 @@ import webrtcvad
 import pyaudio
 import logging
 from vad.base import VAD
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class WEBRTCVAD(VAD):
@@ -42,7 +41,7 @@ class WEBRTCVAD(VAD):
             "format": self.format
         }
 
-        logger.info(f"Opening stream with chunk size {self.chunk}")
+        logger.debug(f"Opening stream with chunk size {self.chunk}")
         self.stream = self.pa.open(
             rate=self.rate,
             channels=self.channels,
@@ -55,7 +54,7 @@ class WEBRTCVAD(VAD):
         """
         Listen on the microphone and return the audio when speech starts and ends.
         """
-        logger.info("Listening on microphone...")
+        logger.info("🎙️  Listening on microphone...")
         try:
             while True:
                 data = self.stream.read(self.chunk)
@@ -65,10 +64,10 @@ class WEBRTCVAD(VAD):
                     is_speech = self.vad.is_speech(data, self.rate)
                     
                     if is_speech:
-                        logger.info("Speech detected")
+                        logger.debug("Speech detected")
                         # TODO: Add your speech handling logic here
                     else:
-                        logger.info("No speech detected")
+                        logger.debug("No speech detected")
                         
                 except Exception as e:
                     logger.error(f"Error processing frame: {e}")
@@ -78,7 +77,7 @@ class WEBRTCVAD(VAD):
                 await asyncio.sleep(0.001)  # Small delay for async cooperation
                 
         except KeyboardInterrupt:
-            logger.info("Stopping VAD...")
+            logger.info("🛑 Stopping VAD...")
         finally:
             self.stream.stop_stream()
             self.stream.close()
