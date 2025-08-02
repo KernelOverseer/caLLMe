@@ -1,4 +1,5 @@
 # caLLMe
+<img width="1536" height="1024" alt="caLLMe Banner" src="https://github.com/user-attachments/assets/a22ddafd-a336-495f-a360-e7b5b65d4530" />
 
 A tiny, **voice-first** assistant that turns your microphone into a real-time conversation with an LLM.  
 caLLMe listens, transcribes, generates a response, speaks it back, and lets you interrupt at any time – all in just a few hundred lines of Python.
