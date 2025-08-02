@@ -1,10 +1,6 @@
 import os
 import logging
 from conversation import Conversation
-from tts.groqPlayai import GroqPlayai
-from stt.groqWhisper import GroqWhisper
-from gen.groq import GroqGen
-from gen.openai import OpenAIGen
 
 # Configure logging globally
 log_level = os.getenv('LOG_LEVEL', 'INFO').upper()
